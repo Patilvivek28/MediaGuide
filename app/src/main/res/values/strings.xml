@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">MediaGuide</string>
+    <string name="title_movie_detail">Movie Detail</string>
+
+    <string name="description_menu_overflow">More options</string>
+    <string name="norating">n/a</string>
+    <string name="action_search">Search</string>
+    <string name="search_hint">Search by name/release date…</string>
+    <string name="text_share">Share</string>
+    <string name="text_rating">Rating</string>
+    <string name="text_overview">Overview</string>
+    <string name="no_items">No Data Available</string>
+
+    <!--Filler String-->
+    <string name="filler_poster_count">%1$d of %2$d</string>
+    <string name="filler_area">%1$s km\u00B2</string>
+</resources>

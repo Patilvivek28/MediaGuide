@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="4dp"
+        android:orientation="horizontal"
+        app:cardCornerRadius="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <!-- The support CardView adds padding for compat shadows on pre-v21, adjust accordingly. -->
+            <!--app:cardBackgroundColor="?attr/sgColorBackgroundCard"-->
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="@dimen/show_poster_width_default"
+                android:layout_height="@dimen/show_poster_height_default"
+                android:layout_marginBottom="@dimen/grid_topbottom_padding"
+                android:layout_marginLeft="@dimen/grid_leftright_padding"
+                android:layout_marginStart="@dimen/grid_leftright_padding"
+                android:layout_marginTop="@dimen/grid_topbottom_padding"
+                app:cardBackgroundColor="#009688"
+                app:cardPreventCornerOverlap="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/iv_movie_poster"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@null"
+                    android:scaleType="centerInside"
+                    tools:src="?attr/sgColorShadow" />
+
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/tv_movie_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:singleLine="true"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:text="Avengers : The Infinity War" />
+
+                <TextView
+                    android:id="@+id/btn_details"
+                    android:layout_width="35dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="end"
+                    android:background="@drawable/ic_next" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_movie_release_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:textSize="14sp"
+                        tools:text="04/05/2018" />
+
+                    <TextView
+                        android:id="@+id/tv_movie_rating"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_weight="0.4"
+                        android:textAlignment="viewEnd"
+                        android:textSize="14sp"
+                        tools:text="(U/A)" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

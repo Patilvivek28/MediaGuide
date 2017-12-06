@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="app_bar_height">200dp</dimen>
+    <dimen name="item_width">200dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+
+    <!-- CardView adds padding on pre-v21 to draw shadows, reduce grid spacing accordingly -->
+    <dimen name="grid_topbottom_padding">5dp</dimen>
+    <dimen name="grid_leftright_padding">6dp</dimen>
+
+    <!-- Show posters, 2:3 aspect ratio -->
+    <dimen name="show_poster_width_default">69dp</dimen>
+    <dimen name="show_poster_height_default">104dp</dimen>
+</resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/movie_list"
+        android:name="com.sinnovations.mediaguide.MovieListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="LinearLayoutManager"
+        tools:context="com.sinnovations.mediaguide.MovieListActivity"
+        tools:listitem="@layout/movie_list_content" />
+
+    <TextView
+        android:id="@+id/tv_no_items"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textStyle="bold"
+        android:textAlignment="gravity"
+        android:textSize="32sp"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/no_items"
+        android:visibility="gone"/>
+
+</LinearLayout>
