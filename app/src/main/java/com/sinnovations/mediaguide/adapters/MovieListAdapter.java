@@ -147,10 +147,10 @@ public class MovieListAdapter
 
         ViewHolder(View view) {
             super(view);
-            ivMoviePoster = (ImageView) view.findViewById(R.id.iv_movie_poster);
-            tvMovieName = (TextView) view.findViewById(R.id.tv_movie_name);
-            tvMovieReleaseDate = (TextView) view.findViewById(R.id.tv_movie_release_date);
-            tvMovieRating = (TextView) view.findViewById(R.id.tv_movie_rating);
+            ivMoviePoster = view.findViewById(R.id.iv_movie_poster);
+            tvMovieName = view.findViewById(R.id.tv_movie_name);
+            tvMovieReleaseDate = view.findViewById(R.id.tv_movie_release_date);
+            tvMovieRating = view.findViewById(R.id.tv_movie_rating);
         }
     }
 }
