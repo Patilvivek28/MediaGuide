@@ -21,9 +21,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.bumptech.glide.Glide;
 import com.sinnovations.mediaguide.data.Constants;
 import com.sinnovations.mediaguide.data.Movie;
+import com.sinnovations.mediaguide.utils.GlideApp;
 import com.sinnovations.mediaguide.utils.MyApplication;
 import com.sinnovations.mediaguide.utils.NetworkUtils;
 
@@ -160,7 +160,7 @@ public class MovieDetailFragment extends Fragment {
                     POSTER_NO = POSTER_NO + 1;
                     String file_path = mPostersList.get(POSTER_NO);
                     String mMoviePosterPath = Constants.MOVIE_POSTER_URL + file_path; //"http://image.tmdb.org/t/p/w500/MOVIE_BACKDROP_NAME.jpg"
-                    Glide.with(getContext()).load(mMoviePosterPath)
+                    GlideApp.with(getContext()).load(mMoviePosterPath)
                             .thumbnail(0.5f)
                             .transition(withCrossFade())
                             .into(ivMovieBackDrop);
@@ -173,7 +173,7 @@ public class MovieDetailFragment extends Fragment {
                     POSTER_NO = POSTER_NO - 1;
                     String file_path = mPostersList.get(POSTER_NO);
                     String mMoviePosterPath = Constants.MOVIE_POSTER_URL + file_path; //"http://image.tmdb.org/t/p/w500/MOVIE_BACKDROP_NAME.jpg"
-                    Glide.with(getContext()).load(mMoviePosterPath)
+                    GlideApp.with(getContext()).load(mMoviePosterPath)
                             .thumbnail(0.5f)
                             .transition(withCrossFade())
                             .into(ivMovieBackDrop);
@@ -234,7 +234,7 @@ public class MovieDetailFragment extends Fragment {
                         POSTER_NO = 0;  //Display the first poster
                         String file_path = mPostersList.get(POSTER_NO);
                         String mMoviePosterPath = Constants.MOVIE_POSTER_URL + file_path; //"http://image.tmdb.org/t/p/w500/MOVIE_BACKDROP_NAME.jpg"
-                        Glide.with(getContext()).load(mMoviePosterPath)
+                        GlideApp.with(getContext()).load(mMoviePosterPath)
                                 .thumbnail(0.5f)
                                 .transition(withCrossFade())
                                 .into(ivMovieBackDrop);

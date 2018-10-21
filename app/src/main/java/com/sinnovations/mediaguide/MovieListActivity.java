@@ -53,13 +53,13 @@ public class MovieListActivity extends AppCompatActivity {
     /**
      * An array of sample (movie) items.
      */
-    public static final List<Movie> MOVIE_ITEM_LIST = new ArrayList<Movie>();
+    public static final List<Movie> MOVIE_ITEM_LIST = new ArrayList<>();
     /**
      * A map of sample (movie) items, by ID.
      */
-    public static final Map<String, Movie> MOVIE_ITEM_MAP = new HashMap<String, Movie>();
+    public static final Map<String, Movie> MOVIE_ITEM_MAP = new HashMap<>();
 
-    private static String jsonResponse;
+    private String jsonResponse;
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -82,7 +82,7 @@ public class MovieListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_list);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
@@ -103,21 +103,21 @@ public class MovieListActivity extends AppCompatActivity {
         assert recyclerView != null;
         mAdapter = new MovieListAdapter(this, MOVIE_ITEM_LIST, mTwoPane);
 
-        if(new NetworkUtils(this).getNetworkStatus()) {
+        if (new NetworkUtils(this).getNetworkStatus()) {
             recyclerView.setVisibility(View.VISIBLE);
             emptyView.setVisibility(View.GONE);
 
-            if (MOVIE_ITEM_LIST.size() == 0) {     //To prevent reloading when the device rotates
+            if (MOVIE_ITEM_LIST.isEmpty()) {     //To prevent reloading when the device rotates
                 fetchMoviesList();
             } else {
                 setupRecyclerView((RecyclerView) recyclerView);
             }
-        }else {
-            Snackbar snackbar = Snackbar.make(emptyView, "No internet connection!", Snackbar.LENGTH_LONG)
+        } else {
+            Snackbar snackbar = Snackbar.make(emptyView, "No internet connection!", Snackbar.LENGTH_INDEFINITE)
                     .setAction("RETRY", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-
+                            fetchMoviesList();
                         }
                     });
             // Changing message text color
@@ -125,7 +125,7 @@ public class MovieListActivity extends AppCompatActivity {
 
             // Changing action button text color
             View sbView = snackbar.getView();
-            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
             textView.setTextColor(Color.YELLOW);
 
             snackbar.show();
@@ -133,7 +133,6 @@ public class MovieListActivity extends AppCompatActivity {
             emptyView.setVisibility(View.VISIBLE);
         }
     }
-
 
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
@@ -148,8 +147,10 @@ public class MovieListActivity extends AppCompatActivity {
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView = (SearchView) menu.findItem(R.id.action_search)
                 .getActionView();
-        searchView.setSearchableInfo(searchManager
-                .getSearchableInfo(getComponentName()));
+        if (searchManager != null) {
+            searchView.setSearchableInfo(searchManager
+                    .getSearchableInfo(getComponentName()));
+        }
         searchView.setMaxWidth(Integer.MAX_VALUE);
 
         // listening to search query text change
@@ -207,7 +208,8 @@ public class MovieListActivity extends AppCompatActivity {
                 .build();
 
         // url to fetch movies data json
-        final String URL = buildUri.toString();     //"https://api.themoviedb.org/3/movie/upcoming?api_key=b7cd3340a794e5a2f35e3abb820b497f";
+        // https://api.themoviedb.org/3/movie/upcoming?api_key=API_KEY
+        final String URL = buildUri.toString();
         showDialog();
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
@@ -270,7 +272,7 @@ public class MovieListActivity extends AppCompatActivity {
 
                                 jsonResponse = "";
                             }
-                        }catch (JSONException e) {
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
