@@ -4,6 +4,7 @@ package com.sinnovations.mediaguide.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +14,13 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.sinnovations.mediaguide.MovieDetailActivity;
 import com.sinnovations.mediaguide.MovieDetailFragment;
 import com.sinnovations.mediaguide.MovieListActivity;
 import com.sinnovations.mediaguide.R;
 import com.sinnovations.mediaguide.data.Constants;
 import com.sinnovations.mediaguide.data.Movie;
+import com.sinnovations.mediaguide.utils.GlideApp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +29,11 @@ import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOption
 
 /**
  * Created by Patil on 04-Dec-17.
- *
  */
 
 public class MovieListAdapter
-        extends RecyclerView.Adapter<MovieListAdapter.ViewHolder>
-        implements Filterable{
+        extends RecyclerView.Adapter<MovieListAdapter.MovieItemViewHolder>
+        implements Filterable {
 
     private final MovieListActivity mParentActivity;
     private final List<Movie> mValues;
@@ -62,29 +62,31 @@ public class MovieListAdapter
     };
 
     public MovieListAdapter(MovieListActivity parent,
-                             List<Movie> movies,
-                             boolean twoPane) {
+                            List<Movie> movies,
+                            boolean twoPane) {
         mParentActivity = parent;
         mValues = movies;
         mValuesFiltered = movies;
         mTwoPane = twoPane;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MovieItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.movie_list_content, parent, false);
-        return new ViewHolder(view);
+        return new MovieItemViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MovieItemViewHolder holder, int position) {
 
-        //holder.ivMoviePoster.setImageResource(R.mipmap.ic_launcher);
         final Movie movie = mValuesFiltered.get(position);
-        String mMoviePosterPath = Constants.MOVIE_POSTER_URL + movie.movie_poster_path; //"http://image.tmdb.org/t/p/w500/MOVIE_POSTER_NAME.jpg"
+        //"http://image.tmdb.org/t/p/w500/MOVIE_POSTER_NAME.jpg"
+        String mMoviePosterPath = Constants.MOVIE_POSTER_URL + movie.movie_poster_path;
 
-        Glide.with(mParentActivity).load(mMoviePosterPath)
+        GlideApp.with(mParentActivity)
+                .load(mMoviePosterPath)
                 .thumbnail(0.5f)
                 .transition(withCrossFade())
                 .into(holder.ivMoviePoster);
@@ -92,9 +94,9 @@ public class MovieListAdapter
         holder.tvMovieName.setText(movie.movie_title);
         holder.tvMovieReleaseDate.setText(movie.movie_release_date);
         boolean mMovieRating = movie.movie_rating;
-        if(mMovieRating) {
+        if (mMovieRating) {
             holder.tvMovieRating.setText("(A)");
-        }else {
+        } else {
             holder.tvMovieRating.setText("(U/A)");
         }
         holder.itemView.setTag(mValuesFiltered.get(position));
@@ -141,11 +143,13 @@ public class MovieListAdapter
         };
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class MovieItemViewHolder extends RecyclerView.ViewHolder {
         final ImageView ivMoviePoster;
-        final TextView tvMovieName, tvMovieReleaseDate, tvMovieRating;
+        final TextView tvMovieName;
+        final TextView tvMovieReleaseDate;
+        final TextView tvMovieRating;
 
-        ViewHolder(View view) {
+        MovieItemViewHolder(View view) {
             super(view);
             ivMoviePoster = view.findViewById(R.id.iv_movie_poster);
             tvMovieName = view.findViewById(R.id.tv_movie_name);
